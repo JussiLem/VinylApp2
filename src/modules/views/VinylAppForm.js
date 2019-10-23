@@ -4,11 +4,12 @@ import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
 import { withStyles } from "@material-ui/core/styles";
 import Paper from "../components/Paper";
+import curvyLines from "../../static/pics/vinylAppCurvyLines.png";
 
 const styles = theme => ({
   root: {
     display: "flex",
-    backgroundImage: "url(/static/onepirate/appCurvyLines.png)",
+    backgroundImage: `url(${curvyLines})`,
     backgroundRepeat: "no-repeat"
   },
   paper: {
@@ -19,7 +20,7 @@ const styles = theme => ({
   }
 });
 
-function VinylAppForm(props) {
+const VinylAppForm = props => {
   const { children, classes } = props;
 
   return (
@@ -31,7 +32,7 @@ function VinylAppForm(props) {
       </Container>
     </div>
   );
-}
+};
 
 VinylAppForm.propTypes = {
   children: PropTypes.node.isRequired,
