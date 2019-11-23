@@ -1,14 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { withStyles } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
-import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
 import CardMedia from "@material-ui/core/CardMedia";
 import PropTypes from "prop-types";
 import Container from "@material-ui/core/Container";
-import imageDots from "../../static/pics/productCTAImageDots.png";
+import IconButton from "@material-ui/core/IconButton";
+import ContactsIcon from "@material-ui/icons/Contacts";
+import { Link } from "react-router-dom";
 
 const styles = theme => ({
   root: {
@@ -22,8 +22,8 @@ const styles = theme => ({
   card: {
     display: "flex",
     justifyContent: "center",
-    backgroundColor: theme.palette.secondary.main,
-    padding: theme.spacing(8, 3)
+    backgroundColor: theme.palette.secondary.main
+    // padding: theme.spacing(8, 3)
   },
   cardContent: {
     maxWidth: 100
@@ -38,24 +38,6 @@ const styles = theme => ({
   },
   imagesWrapper: {
     position: "relative"
-  },
-  imageDots: {
-    position: "absolute",
-    top: -67,
-    left: -67,
-    right: 0,
-    bottom: 0,
-    width: "100%",
-    background: `url(${imageDots})`
-  },
-  image: {
-    position: "absolute",
-    top: -28,
-    left: -28,
-    right: 0,
-    bottom: 0,
-    width: "100%",
-    maxWidth: 600
   }
 });
 
@@ -74,19 +56,32 @@ function VinylList(props) {
                   <Typography>{vinyl.genre}</Typography>
                   {vinyl.thumbnail ? (
                     <CardMedia
-                      style={{ height: 200, width: 200 }}
+                      style={{ height: 100, width: 100 }}
                       // image={url + '/uploads/' + vinyl.thumbnail}
                       title={vinyl.title}
                     />
                   ) : (
                     <Typography style={{ height: 100, width: 75 }}>
-                      Ei kuvaa
+                      No picture
                     </Typography>
                   )}
 
-                  {/*<IconButton  style={{marginLeft: 35, marginRight: 35}} component={ Link }*/}
-                  {/*             to={'/nayta/' + vinyl.id + '/' + vinyl.artist + '/' + vinyl.title + '/' + vinyl.genre  }>*/}
-                  {/*</IconButton>*/}
+                  <IconButton
+                    style={{ marginLeft: 35, marginRight: 35 }}
+                    component={Link}
+                    to={
+                      "/vinylapp/show/" +
+                      vinyl.id +
+                      "/" +
+                      vinyl.artist +
+                      "/" +
+                      vinyl.title +
+                      "/" +
+                      vinyl.genre
+                    }
+                  >
+                    <ContactsIcon />
+                  </IconButton>
                 </CardContent>
               </div>
             </Grid>

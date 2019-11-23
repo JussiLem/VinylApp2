@@ -47,6 +47,7 @@ const rawTheme = createMuiTheme({
       dark: green[700]
     }
   },
+
   typography: {
     fontFamily: "'Work Sans', sans-serif",
     fontSize: 14,

@@ -47,7 +47,7 @@ const VinylAppBar = props => {
             underline="none"
             color="inherit"
             className={classes.title}
-            href="/vinylapp"
+            href="/"
           >
             {"VinylApp"}
           </Link>

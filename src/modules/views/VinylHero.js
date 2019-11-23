@@ -5,6 +5,7 @@ import VinylHeroLayout from "./VinylHeroLayout";
 import Typography from "../components/Typography";
 import Button from "../components/Button";
 import turntable from "../../static/pics/vinyl-turntable.jpg";
+
 const styles = theme => ({
   background: {
     backgroundImage: `url(${turntable})`,
@@ -66,7 +67,7 @@ function VinylHero(props) {
   );
 }
 
-VinylHeroLayout.propTypes = {
+VinylHero.propTypes = {
   classes: PropTypes.object.isRequired
 };
 

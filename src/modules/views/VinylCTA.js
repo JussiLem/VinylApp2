@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -10,6 +10,7 @@ import Snackbar from "../components/Snackbar";
 import Button from "../components/Button";
 import vinyls from "../../static/pics/vinyls.jpg";
 import imageDots from "../../static/pics/productCTAImageDots.png";
+import axios from "axios";
 
 const styles = theme => ({
   root: {
@@ -63,10 +64,34 @@ const styles = theme => ({
 function VinylCTA(props) {
   const { classes } = props;
   const [open, setOpen] = React.useState(false);
+  const [artist, setValues] = React.useState({
+    artist: "",
+    title: "",
+    genre: ""
+  });
 
-  const handleSubmit = event => {
-    event.preventDefault();
-    setOpen(true);
+  const [msg, setMsg] = useState("");
+  const addArtist = e => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("artist", artist.artist);
+    formData.append("title", artist.title);
+    formData.append("genre", artist.genre);
+    axios.post("http://localhost:8080/vinyl/add", formData).then(response => {
+      if (200 === response.status) {
+        setValues({ artist: "", title: "", genre: "" });
+        setMsg("Added");
+      } else {
+        setMsg("Adding failed");
+      }
+    });
+  };
+
+  const handleChange = e => {
+    setValues({
+      ...artist,
+      [e.target.name]: e.target.value
+    });
   };
 
   const handleClose = () => {
@@ -78,25 +103,45 @@ function VinylCTA(props) {
       <Grid container>
         <Grid item xs={12} md={6} className={classes.cardWrapper}>
           <div className={classes.card}>
-            <form onSubmit={handleSubmit} className={classes.cardContent}>
+            <form className={classes.cardContent}>
               <Typography variant="h2" component="h2" gutterBottom>
-                Look for your favourite artist releases
+                Add your favourite artist to database
               </Typography>
               <Typography variant="h5">
-                Type here to look for releases from Discogs.
+                Type here to add artist to db
               </Typography>
               <TextField
                 noBorder
                 className={classes.textField}
                 placeholder="Your artist"
+                name={"artist"}
+                value={artist.artist}
+                onChange={handleChange}
+              />
+              <TextField
+                noBorder
+                name={"title"}
+                className={classes.textField}
+                placeholder="Artist title"
+                value={artist.title}
+                onChange={handleChange}
+              />
+              <TextField
+                noBorder
+                name={"genre"}
+                className={classes.textField}
+                placeholder="Artist genre"
+                value={artist.genre}
+                onChange={handleChange}
               />
               <Button
                 type="submit"
                 color="primary"
                 variant="contained"
                 className={classes.button}
+                onClick={addArtist}
               >
-                Search!
+                Add!
               </Button>
             </form>
           </div>
