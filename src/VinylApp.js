@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import SignIn from "./SignIn";
 import VinylCTA from "./modules/views/VinylCTA";
 import ArtistReleaseForm from "./modules/views/ArtistReleaseForm";
+import GetVinyls from "./modules/views/GetVinyls";
 
 const VinylApp = () => {
   return (
@@ -25,6 +26,7 @@ const VinylApp = () => {
           </Route>
         </Switch>
         {/*<ArtistReleaseForm/>*/}
+        <GetVinyls />
         <VinylCTA />
         <VinylAppFooter />
       </Router>
