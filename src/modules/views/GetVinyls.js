@@ -9,9 +9,9 @@ import ErrorIcon from "@material-ui/icons/Error";
 import WarningIcon from "@material-ui/icons/Warning";
 import InfoIcon from "@material-ui/icons/Info";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
-import { amber, green } from "@material-ui/core/colors";
 import clsx from "clsx";
 import SnackbarContent from "@material-ui/core/SnackbarContent";
+import * as axios from "axios";
 
 const variantIcon = {
   success: CheckCircleIcon,
@@ -50,7 +50,7 @@ const styles = theme => ({
 
 const useStyles1 = makeStyles(theme => ({
   success: {
-    backgroundColor: green[600]
+    backgroundColor: theme.palette.success.xLight
   },
   error: {
     backgroundColor: theme.palette.error.dark
@@ -59,7 +59,7 @@ const useStyles1 = makeStyles(theme => ({
     backgroundColor: theme.palette.primary.main
   },
   warning: {
-    backgroundColor: amber[700]
+    backgroundColor: theme.palette.warning.main
   },
   icon: {
     fontSize: 20
@@ -119,16 +119,15 @@ const useStyles2 = makeStyles(theme => ({
 
 function GetVinyls(props) {
   const classesStyles = useStyles2();
-  const { classes } = props;
   const [artists, setArtists] = React.useState([]);
   const [error, setError] = React.useState("Loading");
+  const url = "http://localhost:8080/vinyl/all";
 
   useEffect(() => {
     const getAllVinyls = async () => {
       try {
-        const response = await fetch("http://localhost:8080/vinyl/all");
-        const json = await response.json();
-        setArtists(json);
+        const response = await axios(url);
+        setArtists(response.data);
         setError("");
       } catch (error) {
         setArtists([]);
@@ -136,13 +135,9 @@ function GetVinyls(props) {
       }
     };
     getAllVinyls();
-  }, []);
+  }, [props.artist]);
 
   const [open, setOpen] = React.useState(true);
-
-  const handleClick = () => {
-    setOpen(true);
-  };
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -154,52 +149,6 @@ function GetVinyls(props) {
 
   if (error.length > 0) {
     return (
-      <div>
-        <Snackbar
-          anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "left"
-          }}
-          open={open}
-          autoHideDuration={6000}
-          onClose={handleClose}
-        >
-          <MySnackbarContentWrapper
-            variant={"error"}
-            className={classesStyles.margin}
-            onClose={handleClose}
-            message={error}
-          />
-        </Snackbar>
-      </div>
-    );
-  }
-
-  if (artists.length > 0) {
-    return (
-      <div>
-        <Snackbar
-          anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "left"
-          }}
-          open={open}
-          autoHideDuration={1}
-          onClose={handleClose}
-        >
-          <MySnackbarContentWrapper
-            onClose={handleClose}
-            variant="success"
-            message="Fetched content succesfully!"
-          />
-        </Snackbar>
-        <VinylList vinyls={artists} />
-      </div>
-    );
-  }
-
-  return (
-    <div>
       <Snackbar
         anchorOrigin={{
           vertical: "bottom",
@@ -210,13 +159,36 @@ function GetVinyls(props) {
         onClose={handleClose}
       >
         <MySnackbarContentWrapper
-          onClose={handleClose}
-          variant="warning"
+          variant={"error"}
           className={classesStyles.margin}
-          message="No artists were found!"
+          onClose={handleClose}
+          message={`${error} 😱`}
         />
       </Snackbar>
-    </div>
+    );
+  }
+
+  if (artists.length > 0) {
+    return <VinylList vinyls={artists} />;
+  }
+
+  return (
+    <Snackbar
+      anchorOrigin={{
+        vertical: "bottom",
+        horizontal: "left"
+      }}
+      open={open}
+      autoHideDuration={6000}
+      onClose={handleClose}
+    >
+      <MySnackbarContentWrapper
+        onClose={handleClose}
+        variant="warning"
+        className={classesStyles.margin}
+        message="No artists were found!"
+      />
+    </Snackbar>
   );
 }
 

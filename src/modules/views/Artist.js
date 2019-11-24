@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
@@ -13,6 +13,9 @@ import PropTypes from "prop-types";
 import Container from "@material-ui/core/Container";
 import Fab from "@material-ui/core/Fab";
 import EditIcon from "@material-ui/icons/Edit";
+import Snackbar from "../components/Snackbar";
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/core/SvgIcon/SvgIcon";
 
 const styles = theme => ({
   root: {
@@ -42,13 +45,27 @@ function Artist(props) {
   let { title } = useParams();
   let { genre } = useParams();
   const today = new Date();
-  // tai  let { id, artist, title, genre } = useParams();
+  const [msg, setMsg] = useState("");
+  const [open, setOpen] = React.useState(false);
 
   const removeArtist = () => {
     const fetchData = async () => {
-      await axios(`http://localhost:8080/vinyl/delete/${id}`);
+      await axios(`http://localhost:8080/vinyl/delete/${id}`).then(response => {
+        if (response.status === 200) {
+          setMsg("Removed: " + artist);
+          setOpen(true);
+        }
+      });
     };
     fetchData();
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
   };
 
   return (
@@ -85,6 +102,30 @@ function Artist(props) {
           </Link>
         </CardContent>
       </Card>
+      <Snackbar
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "left"
+        }}
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        ContentProps={{
+          "aria-describedby": "message-id"
+        }}
+        message={<span id="message-id">{msg}</span>}
+        action={[
+          <IconButton
+            key="close"
+            aria-label="close"
+            color="inherit"
+            className={classes.close}
+            onClick={handleClose}
+          >
+            <CloseIcon />
+          </IconButton>
+        ]}
+      />
     </Container>
   );
 }

@@ -2,21 +2,20 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import Hidden from "@material-ui/core/Hidden";
 import Container from "@material-ui/core/Container";
 import Typography from "../components/Typography";
 import TextField from "../components/TextField";
 import Snackbar from "../components/Snackbar";
 import Button from "../components/Button";
-import vinyls from "../../static/pics/vinyls.jpg";
-import imageDots from "../../static/pics/productCTAImageDots.png";
 import axios from "axios";
 import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 
 const styles = theme => ({
   root: {
     marginTop: theme.spacing(10),
     marginBottom: 0,
+    marginLeft: theme.spacing(60),
     display: "flex"
   },
   cardWrapper: {
@@ -38,27 +37,6 @@ const styles = theme => ({
   },
   button: {
     width: "100%"
-  },
-  imagesWrapper: {
-    position: "relative"
-  },
-  imageDots: {
-    position: "absolute",
-    top: -67,
-    left: -67,
-    right: 0,
-    bottom: 0,
-    width: "100%",
-    background: `url(${imageDots})`
-  },
-  image: {
-    position: "absolute",
-    top: -28,
-    left: -28,
-    right: 0,
-    bottom: 0,
-    width: "100%",
-    maxWidth: 600
   }
 });
 
@@ -116,7 +94,7 @@ function VinylEditForm(props) {
               <TextField
                 noBorder
                 className={classes.textField}
-                placeholder="Your artist"
+                placeholder={artist}
                 name={"artist"}
                 value={artist.artist}
                 onChange={handleChange}
@@ -125,7 +103,7 @@ function VinylEditForm(props) {
                 noBorder
                 name={"title"}
                 className={classes.textField}
-                placeholder="Artist title"
+                placeholder="New artist title"
                 value={artist.title}
                 onChange={handleChange}
               />
@@ -144,16 +122,13 @@ function VinylEditForm(props) {
                 className={classes.button}
                 onClick={editArtist}
               >
-                Add!
+                Edit!
               </Button>
             </form>
+            <Link to="/">
+              <Typography>Close</Typography>
+            </Link>
           </div>
-        </Grid>
-        <Grid item xs={12} md={6} className={classes.imagesWrapper}>
-          <Hidden smDown>
-            <div className={classes.imageDots} />
-            <img src={vinyls} alt="call to action" className={classes.image} />
-          </Hidden>
         </Grid>
       </Grid>
       <Snackbar

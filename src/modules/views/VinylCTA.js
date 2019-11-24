@@ -11,6 +11,8 @@ import Button from "../components/Button";
 import vinyls from "../../static/pics/vinyls.jpg";
 import imageDots from "../../static/pics/productCTAImageDots.png";
 import axios from "axios";
+import CloseIcon from "@material-ui/icons/Close";
+import IconButton from "@material-ui/core/IconButton";
 
 const styles = theme => ({
   root: {
@@ -65,11 +67,10 @@ function VinylCTA(props) {
   const { classes } = props;
   const [open, setOpen] = React.useState(false);
   const [artist, setValues] = React.useState({
-    artist: "",
+    artist: props.artist,
     title: "",
     genre: ""
   });
-
   const [msg, setMsg] = useState("");
   const addArtist = e => {
     e.preventDefault();
@@ -80,9 +81,11 @@ function VinylCTA(props) {
     axios.post("http://localhost:8080/vinyl/add", formData).then(response => {
       if (200 === response.status) {
         setValues({ artist: "", title: "", genre: "" });
-        setMsg("Added");
+        setMsg("Added: " + artist.artist);
+        setOpen(true);
       } else {
-        setMsg("Adding failed");
+        setMsg(`Adding failed: ${response.status.toString()}`);
+        setOpen(true);
       }
     });
   };
@@ -94,7 +97,11 @@ function VinylCTA(props) {
     });
   };
 
-  const handleClose = () => {
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
     setOpen(false);
   };
 
@@ -152,12 +159,31 @@ function VinylCTA(props) {
             <img src={vinyls} alt="call to action" className={classes.image} />
           </Hidden>
         </Grid>
+        <Snackbar
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "left"
+          }}
+          open={open}
+          autoHideDuration={6000}
+          onClose={handleClose}
+          ContentProps={{
+            "aria-describedby": "message-id"
+          }}
+          message={<span id="message-id">{msg}</span>}
+          action={[
+            <IconButton
+              key="close"
+              aria-label="close"
+              color="inherit"
+              className={classes.close}
+              onClick={handleClose}
+            >
+              <CloseIcon />
+            </IconButton>
+          ]}
+        />
       </Grid>
-      <Snackbar
-        open={open}
-        onClose={handleClose}
-        message="Will look for your artist "
-      />
     </Container>
   );
 }

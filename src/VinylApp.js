@@ -16,29 +16,33 @@ const VinylApp = () => {
       <Router>
         <VinylAppBar />
         <Switch>
-          <Route exact path="/vinylapp">
+          <Route exact path="/">
             <VinylHero />
+            <Route path="/vinylapp/edit/:id/:artist">
+              <VinylEditForm />
+            </Route>
+            <Route path="/vinylapp/show/:id/:artist/:title/:genre">
+              <Artist />
+            </Route>
+            <GetVinyls />
+            <VinylCTA />
           </Route>
           <Route path="/vinylapp/signin">
             <SignIn />
           </Route>
           <Route path="/">
             <VinylHero />
+            <Route path="/vinylapp/edit/:id/:artist">
+              <VinylEditForm />
+            </Route>
             <Route path="/vinylapp/show/:id/:artist/:title/:genre">
               <Artist />
             </Route>
             <GetVinyls />
-
             <VinylCTA />
           </Route>
-
-          <Route path="/vinylapp/edit/:id/:artist">
-            <VinylEditForm />
-          </Route>
-
           {/*<ArtistReleaseForm/>*/}
         </Switch>
-
         <VinylAppFooter />
       </Router>
     </>

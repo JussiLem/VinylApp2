@@ -1,5 +1,5 @@
 import { createMuiTheme } from "@material-ui/core/styles";
-import { green, grey, red } from "@material-ui/core/colors";
+import { amber, green, grey, red } from "@material-ui/core/colors";
 
 // /* Color Theme Swatches in Hex */
 // .Kuvitus-1-hex { color: #D9D9D9; }
@@ -34,7 +34,7 @@ const rawTheme = createMuiTheme({
       dark: "#0D1A26"
     },
     warning: {
-      main: "#ffc071",
+      main: amber[700],
       dark: "#ffb25e"
     },
     error: {
@@ -43,7 +43,7 @@ const rawTheme = createMuiTheme({
       dark: red[700]
     },
     success: {
-      xLight: green[50],
+      xLight: green[600],
       dark: green[700]
     }
   },

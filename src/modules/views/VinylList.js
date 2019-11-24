@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 const styles = theme => ({
   root: {
     marginTop: theme.spacing(10),
-    marginBottom: 0,
+    marginBottom: theme.spacing(20),
     display: "flex"
   },
   cardWrapper: {
@@ -22,22 +22,19 @@ const styles = theme => ({
   card: {
     display: "flex",
     justifyContent: "center",
-    backgroundColor: theme.palette.secondary.main
-    // padding: theme.spacing(8, 3)
+    backgroundColor: theme.palette.secondary.main,
+    padding: theme.spacing(6, 2)
   },
   cardContent: {
     maxWidth: 100
   },
   textField: {
     width: "100%",
-    marginTop: theme.spacing(3),
-    marginBottom: theme.spacing(2)
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1)
   },
   button: {
     width: "100%"
-  },
-  imagesWrapper: {
-    position: "relative"
   }
 });
 
@@ -45,6 +42,11 @@ function VinylList(props) {
   const { classes } = props;
   return (
     <Container className={classes.root} component="section">
+      <div className={classes.cardWrapper}>
+        <Typography color="inherit" align="center" variant="h2">
+          Vinyl List
+        </Typography>
+      </div>
       <Grid container>
         {props.vinyls.map(vinyl => {
           return (
@@ -56,18 +58,14 @@ function VinylList(props) {
                   <Typography>{vinyl.genre}</Typography>
                   {vinyl.thumbnail ? (
                     <CardMedia
-                      style={{ height: 100, width: 100 }}
                       // image={url + '/uploads/' + vinyl.thumbnail}
                       title={vinyl.title}
                     />
                   ) : (
-                    <Typography style={{ height: 100, width: 75 }}>
-                      No picture
-                    </Typography>
+                    <Typography>No picture</Typography>
                   )}
 
                   <IconButton
-                    style={{ marginLeft: 35, marginRight: 35 }}
                     component={Link}
                     to={
                       "/vinylapp/show/" +
