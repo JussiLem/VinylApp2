@@ -22,7 +22,7 @@ const VinylApp = () => {
               <VinylEditForm />
             </Route>
             <Route path="/vinylapp/show/:id/:artist/:title/:genre">
-              <Artist />
+              <GetVinyls artisti="van halen" />
             </Route>
             <GetVinyls />
             <VinylCTA />
@@ -38,7 +38,7 @@ const VinylApp = () => {
             <Route path="/vinylapp/show/:id/:artist/:title/:genre">
               <Artist />
             </Route>
-            <GetVinyls />
+            <GetVinyls artisti="van halen" />
             <VinylCTA />
           </Route>
           {/*<ArtistReleaseForm/>*/}
