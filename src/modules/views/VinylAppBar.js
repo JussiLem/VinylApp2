@@ -56,7 +56,7 @@ const VinylAppBar = props => {
             variant="h6"
             underline="none"
             className={classes.rightLink}
-            href="/vinylapp/signin"
+            href="/signin"
           >
             {"Sign In"}
           </Link>
@@ -64,13 +64,12 @@ const VinylAppBar = props => {
             variant="h6"
             underline="none"
             className={clsx(classes.rightLink, classes.linkSecondary)}
-            href="/vinylapp/signup"
+            href="/signup"
           >
             {"Sign Up"}
           </Link>
         </Toolbar>
       </AppBar>
-      {/*<div className={classes.placeholder}/>*/}
     </div>
   );
 };

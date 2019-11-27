@@ -10,43 +10,29 @@ import GetVinyls from "./modules/views/GetVinyls";
 import Artist from "./modules/views/Artist";
 import VinylEditForm from "./modules/views/VinylEditForm";
 
-const VinylApp = () => {
-  return (
-    <>
-      <Router>
-        <VinylAppBar />
-        <Switch>
-          <Route exact path="/">
-            <VinylHero />
-            <Route path="/vinylapp/edit/:id/:artist">
-              <VinylEditForm />
-            </Route>
-            <Route path="/vinylapp/show/:id/:artist/:title/:genre">
-              <GetVinyls artisti="van halen" />
-            </Route>
-            <GetVinyls />
-            <VinylCTA />
+const VinylApp = () => (
+  <>
+    <Router>
+      <VinylAppBar />
+      <Switch>
+        <Route exact path="/">
+          <VinylHero />
+          <Route path="/edit/:id/:artist">
+            <VinylEditForm />
           </Route>
-          <Route path="/vinylapp/signin">
-            <SignIn />
+          <Route path="/show/:id/:artist/:title/:genre">
+            <Artist />
           </Route>
-          <Route path="/">
-            <VinylHero />
-            <Route path="/vinylapp/edit/:id/:artist">
-              <VinylEditForm />
-            </Route>
-            <Route path="/vinylapp/show/:id/:artist/:title/:genre">
-              <Artist />
-            </Route>
-            <GetVinyls artisti="van halen" />
-            <VinylCTA />
-          </Route>
-          {/*<ArtistReleaseForm/>*/}
-        </Switch>
-        <VinylAppFooter />
-      </Router>
-    </>
-  );
-};
+          <GetVinyls />
+          <VinylCTA />
+        </Route>
+        <Route path="/signin">
+          <SignIn />
+        </Route>
+      </Switch>
+      <VinylAppFooter />
+    </Router>
+  </>
+);
 
 export default withRoot(VinylApp);

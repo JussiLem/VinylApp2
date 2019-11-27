@@ -118,6 +118,7 @@ const useStyles2 = makeStyles(theme => ({
 }));
 
 function GetVinyls(props) {
+  // console.log("props: " + JSON.stringify())
   const classesStyles = useStyles2();
   const [artists, setArtists] = React.useState([]);
   const [error, setError] = React.useState("Loading");
@@ -135,7 +136,7 @@ function GetVinyls(props) {
       }
     };
     getAllVinyls();
-  }, [props.artist]);
+  }, []);
 
   const [open, setOpen] = React.useState(true);
 

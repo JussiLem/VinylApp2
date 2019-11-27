@@ -27,7 +27,7 @@ const styles = theme => ({
   }
 });
 
-function VinylHero(props) {
+const VinylHero = props => {
   const { classes } = props;
 
   return (
@@ -65,7 +65,7 @@ function VinylHero(props) {
       </Typography>
     </VinylHeroLayout>
   );
-}
+};
 
 VinylHero.propTypes = {
   classes: PropTypes.object.isRequired

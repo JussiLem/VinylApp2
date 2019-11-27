@@ -63,11 +63,11 @@ const styles = theme => ({
   }
 });
 
-function VinylCTA(props) {
+const VinylCTA = props => {
   const { classes } = props;
   const [open, setOpen] = React.useState(false);
   const [artist, setValues] = React.useState({
-    artist: props.artist,
+    artist: "",
     title: "",
     genre: ""
   });
@@ -101,7 +101,6 @@ function VinylCTA(props) {
     if (reason === "clickaway") {
       return;
     }
-
     setOpen(false);
   };
 
@@ -186,7 +185,7 @@ function VinylCTA(props) {
       </Grid>
     </Container>
   );
-}
+};
 
 VinylCTA.propTypes = {
   classes: PropTypes.object.isRequired

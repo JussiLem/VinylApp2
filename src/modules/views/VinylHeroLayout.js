@@ -51,7 +51,7 @@ const styles = theme => ({
   }
 });
 
-function VinylHeroLayout(props) {
+const VinylHeroLayout = props => {
   const { backgroundClassName, children, classes } = props;
 
   return (
@@ -71,7 +71,7 @@ function VinylHeroLayout(props) {
       </Container>
     </section>
   );
-}
+};
 
 VinylHeroLayout.propTypes = {
   backgroundClassName: PropTypes.string.isRequired,

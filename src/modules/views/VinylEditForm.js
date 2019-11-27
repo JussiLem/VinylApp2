@@ -40,11 +40,10 @@ const styles = theme => ({
   }
 });
 
-function VinylEditForm(props) {
+const VinylEditForm = props => {
   const { classes } = props;
   const [open, setOpen] = React.useState(false);
   const [vinyl, setValues] = React.useState({
-    id: "",
     artist: "",
     title: "",
     genre: ""
@@ -138,7 +137,7 @@ function VinylEditForm(props) {
       />
     </Container>
   );
-}
+};
 
 VinylEditForm.propTypes = {
   classes: PropTypes.object.isRequired

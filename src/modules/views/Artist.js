@@ -81,7 +81,6 @@ function Artist(props) {
           subheader={today.getFullYear()}
         />
         <CardContent>
-          {/*<Typography>Id: { id }</Typography>*/}
           <Typography variant="body2" color="textPrimary" component="p">
             {title}
           </Typography>
@@ -89,9 +88,7 @@ function Artist(props) {
             {genre}
           </Typography>
           <Fab color="primary" aria-label="edit">
-            <EditIcon component={Link} to={`/vinylapp/edit/${id}/${artist}`} />
-
-            {/*<Button onClick={removeArtist}>Edit</Button>*/}
+            <EditIcon component={Link} to={`/edit/${id}/${artist}`} />
           </Fab>
 
           <Fab color="secondary" aria-label="delete">

@@ -61,7 +61,7 @@ const SignIn = () => {
           </Typography>
           <Typography variant="body2" align="center">
             {"Not a member yet? "}
-            <Link href="/vinylapp/sign-up/" align="center" underline="always">
+            <Link href="/sign-up/" align="center" underline="always">
               Sign Up here
             </Link>
           </Typography>
@@ -119,7 +119,7 @@ const SignIn = () => {
           )}
         </Form>
         <Typography align="center">
-          <Link underline="always" href="/vinylapp/forgot-password/">
+          <Link underline="always" href="/forgot-password/">
             Forgot password?
           </Link>
         </Typography>

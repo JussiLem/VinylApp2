@@ -38,7 +38,7 @@ const styles = theme => ({
   }
 });
 
-function VinylList(props) {
+const VinylList = props => {
   const { classes } = props;
   return (
     <Container className={classes.root} component="section">
@@ -68,7 +68,7 @@ function VinylList(props) {
                   <IconButton
                     component={Link}
                     to={
-                      "/vinylapp/show/" +
+                      "/show/" +
                       vinyl.id +
                       "/" +
                       vinyl.artist +
@@ -88,7 +88,7 @@ function VinylList(props) {
       </Grid>
     </Container>
   );
-}
+};
 
 VinylList.propTypes = {
   classes: PropTypes.object.isRequired

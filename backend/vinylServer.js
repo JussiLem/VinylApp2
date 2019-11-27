@@ -86,8 +86,8 @@ app.post('/vinyl/edit', upload.single('thumbnail'), (req, res) => {
 
 
 app.get('/download/:name', (req, res) => {
-	const file = './images/' + req.params.name;
-	res.download(file);
+    const file = './images/' + req.params.name;
+    res.download(file);
 });
 
 app.get('/vinyl/delete/:id', (req, res) => {

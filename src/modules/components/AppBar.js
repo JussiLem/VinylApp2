@@ -7,7 +7,7 @@ const styles = theme => ({
   root: {
     color: theme.palette.common.white
     /*background: 'transparent',
-    boxShadow: 'none'*/
+        boxShadow: 'none'*/
   }
 });
 
